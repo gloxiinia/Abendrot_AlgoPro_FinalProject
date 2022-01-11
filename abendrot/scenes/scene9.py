@@ -26,7 +26,7 @@ class SceneNine(Scene):
         well.addAlias('cottage well')
         well.addAlias('waterhole')
         well.detailedDescription = """
-        
+        It's a pretty old, but sturdy well.
         """
         self.addObject(well)
 
@@ -45,6 +45,8 @@ class SceneNine(Scene):
     def getDescription(self):
         description = """
         Jules' cottage. It's quaint, like what you'd see in those storybooks parents read to their kids. 
+        Outside, near the entrance to the garden, you can see an old well. Looks like it's used pretty regularly,
+        if the puddles around it are anything to go by.
         """
 
         return description

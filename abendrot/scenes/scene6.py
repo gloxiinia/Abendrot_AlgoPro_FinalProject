@@ -22,11 +22,11 @@ class SceneSix(Scene):
         # creating objects
         harbor = gameObject()
         harbor.name = 'harbor'
-        harbor.aliases.append('docks')
-        harbor.aliases.append('bay')
-        harbor.aliases.append('dock')
-        harbor.aliases.append('waterfront')
-        harbor.aliases.append('marina')
+        harbor.addAlias('docks')
+        harbor.addAlias('bay')
+        harbor.addAlias('dock')
+        harbor.addAlias('waterfront')
+        harbor.addAlias('marina')
         harbor.detailedDescription = """
         The harbor is where the magic happens for most people. Stepping off the gangway of any ship, finally
         setting foot in Sonnenau's docks and getting a glimpse of the statues in the distant entryway.
@@ -64,17 +64,3 @@ class SceneSix(Scene):
         tapestry woven by nature, fishing and commercial boats come and go from the docks at random intervals.
         """
         return examination
-            
-"""
-Need more be said about the Sehnsucht Bucht? Even its name evokes the romantic, if melancholy, 
-        notion of saudade. Myths, legends, and tragedies recorded and passed down through the generations. 
-        The makers, or perhaps witnesses to these accounts share them with themselves, then to their 
-        children, then to their own offspring, perpetuating a mimetic loop of endless collaborative ideas. 
-        A little flair added here, a new player in the story added there, a change of motive. Hell, maybe 
-        a different ending entirely.
-        Sometimes, don't you wonder, if a tale has been repeated on and on, spread in various forms and 
-        shapes, appended with details that differ from its initial telling...
-
-        Is it still what it was originally?
-
-"""

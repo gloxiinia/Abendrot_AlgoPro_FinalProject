@@ -94,9 +94,9 @@ class SceneTen(Scene):
         Though, when his eyes get starry-eyed and he looks this delighted… it's difficult to stop him 
         (well, that's if you even wanted to).
 
-        After a good few minutes, he finally remembers your pay. Taking out his coin purse and dropping 20–count em, yes, 20–gold 
-        pieces onto the table. You gladly pick them up and store them into your own coin purse. Ah. Shaking it a bit to confirm, 
-        you can audibly hear the jingle of the coins. 
+        After a good few minutes, he finally remembers your pay. Taking out his coin purse and dropping
+        20–count em, yes, 20–gold pieces onto the table. You gladly pick them up and store them into your 
+        own coin purse. Ah. Shaking it a bit to confirm, you can audibly hear the jingle of the coins. 
 
         "Thank you, I'll definitely be commissioning you for more of these fetch quests."
 

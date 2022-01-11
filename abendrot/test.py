@@ -1,8 +1,10 @@
 #importing the needed modules
 
+
+
 from core.parsertext import parse
-from core.functions import tryScenechange, examineObject, getHelp, moveHandler, examineNpc, getNpcdialogue, printDialoguechoices
-from core.functions import centerText, typeWriter, printBorder, printMap, getNPCnames, getPlayername
+from core.functions import tryScenechange, examineObject, getHelp, moveHandler, examineNpc, printDialoguechoices
+from core.functions import centerText, typeWriter, printBorder, printMap, getPlayername, tryForNPCdialogue, printEndcredits
 from art import *
 
 import random
@@ -47,6 +49,7 @@ myPlayer = char.Player()
 
 #function for prompting the player with an input as an action
 def promptAction():
+    isGameover = False
     global activeScene
     #creating a list of acceptable actions for the player to do
     acceptActions = ['look', 'lookat', 'lookaround' 'inspect', 'check', 'examine', 'move', 'walk', 'go',
@@ -61,11 +64,8 @@ def promptAction():
     #list of the character names
     charList = ['mama', 'petra', 'michel', 'julian', 'korvin', 'emil', 'felix', 'ferdinand', 'ingrid', 'nico']
 
-    printBorder()
-
-
     #while loop to check if user input is valid
-    while True:
+    while isGameover == False:
         #prompting for user input, what action they want to do
         playerAction = input('\nSo, what do you wanna do?\n> ')
         parsedAction = parse(playerAction)
@@ -75,12 +75,12 @@ def promptAction():
             invalidActionlist = ["\nSorry, no dice, you can't do that, try again.", "\nBuddy, I can't understand that, try again.",
             "\nCould you try again? I can't seem to recognize that command.", "\nTut mir leid, Vöglein, unfortunately you can't do that."]
             print(random.choice(invalidActionlist))
-            continue
+            break
 
         #elif statement to print out the help screen
         elif parsedAction[0] == 'help':
             getHelp()
-            continue
+            break
             
         #elif statement for if user wants to quit the game
         elif parsedAction[0] == 'quit':
@@ -90,7 +90,7 @@ def promptAction():
         #elif statement for printing the map
         elif parsedAction[0] == 'map' or parsedAction[0] in examineActions and parsedAction[1] == 'map':
             printMap(myPlayer)
-            continue
+            break
 
         #elif statement for if user wants to inspect or look at something
         elif parsedAction[0] in examineActions :
@@ -100,7 +100,7 @@ def promptAction():
             else:
                 output = examineObject(activeScene, parsedAction[1])
             print(output)
-            continue
+            break
         
         #elif statement for if user wants to move
         elif parsedAction[0] in moveActions :
@@ -108,61 +108,34 @@ def promptAction():
                 invalidMovedirectionsList = ["Hmm? I didn't catch that, go where? Try again, please.", "Where did you wanna go? Could you try again?",
                 "I didn't recognize that direction, sorry.", "Try again please, I couldn't understand which direction you meant."]
                 print('\n' + random.choice(invalidMovedirectionsList))
-                continue
+                break
             else:
                 result = tryScenechange(activeScene, scenes, parsedAction[1])
                 activeScene = result[0]
                 output = result[1]
                 moveHandler(activeScene, output)
-                continue
+                break
 
         #elif statement for if the user wants to talk to an NPC
         elif parsedAction[0] in talkActions:
             printDialoguechoices(activeScene, parsedAction[1])
-
-            #if statements to check if the intended npc to be talked with is valid
-            if parsedAction[1] == myPlayer.name or parsedAction[1] in ['me', 'myself']:
-                print('\nWell, if you wanna talk with yourself, be my guest...')
-                continue
-            if parsedAction[1] == '':
-                invalidTalkList1 = ["\nI don't know who that is.", "\nWith who? Try again, please.", 
-                                    "\nI don't seem to recognize that name.", "\nOh I've heard that name... They're not in Sonnenau though."]
-                print(random.choice(invalidTalkList1))
-                continue
-            if parsedAction[1] not in getNPCnames(activeScene):
-                invalidTalkList2 = ["\nSorry, they're not here right now.", "\nVöglein, they're not in your general vicinity.",
-                                    "\nAiya, I don't see them anywhere here."]
-                print(random.choice(invalidTalkList2))
-                continue
-
-            #else statement for if npc to be talked with is found to be valid
-            else:
-                while True:
-                    try:
-                        dialogueChoice = int(input("> "))
-                        output = getNpcdialogue(activeScene, parsedAction[1], dialogueChoice)
-                    except IndexError:
-                        typeWriter("\nThat conversation topic isn't available.\n", 0.05)
-                        break
-                    except ValueError:
-                        typeWriter("\nThat conversation topic isn't available.\n", 0.05)                        
-                        break
-                    if output == None:
-                        print("\nThat person can't talk right now.\n")
-                        break
-                    else:
-                        output = output.replace('playername', myPlayer.name)
-                        typeWriter(output, 0.05)                         
-                        break
-
-
+            output = tryForNPCdialogue(activeScene, parsedAction[1], myPlayer)
+            dialogue = output
+            dialogue = dialogue.replace('playername', myPlayer.name)
+            typeWriter(dialogue, 0.05)
+            break
+        if myPlayer.gameOver is True:
+            isGameover = True
+            break
+        
 #GAME FUNCTIONALITY
 def gameLoop():
     while myPlayer.gameOver == False:
         promptAction()
     
-    else:
-        pass
+    if myPlayer.gameOver is True:
+        printEndcredits()
+        sys.exit
 
 #defining the title screen function that will determine the desired user selection
 def titleScreenoptions():
@@ -319,6 +292,8 @@ def gameSetup():
     """
     centerText(introArt)
     centerText(introBlurb)
+    printBorder()
     gameLoop()
 
-printTitle()
+
+printEndcredits()

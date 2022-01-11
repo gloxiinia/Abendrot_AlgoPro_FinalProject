@@ -22,7 +22,7 @@ class SceneThree(Scene):
         # creating objects
         fountain = gameObject()
         fountain.name = 'fountain'
-        fountain.aliases.append('fount')
+        fountain.addAlias('fount')
         fountain.detailedDescription = """
         The Sonnenau Plaza fountain. It sits in the middle of the plaza and serves as a place
         for people to throw their coins down the drain. In return, they receive the unfounded
@@ -101,7 +101,7 @@ class SceneThree(Scene):
 
         Both of them don’t seem to care though, with Ingrid barreling on.
 
-        “Felix doesn’t count, the guy practically lives and breathes books, there’s nothing he won’t 
+        “Felix doesn’t count, they practically live and breathe books, there’s nothing they won’t 
         listen to if it involves the word ‘book’ or ‘literature’.”
 
         …

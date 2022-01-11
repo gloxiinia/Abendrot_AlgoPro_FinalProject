@@ -35,11 +35,6 @@ class Scene:
     def addNPC(self, npc):
         self.npcs.append(npc)
     
-    #method to remove pickupable objects from location
-    def removePickup(self, object):
-        self.pickups.remove(object)
-        return object
-    
     #getter method that returns a description in the form of a string
     def getDescription(self):
         return ""
@@ -51,12 +46,6 @@ class Scene:
     def getAreaname(self):
         return self.areaName
 
-    #def activate_object(self, object_to_activate, player):
-    #    description = "nothing much happens"
-    #    result = (self, description, player)
-    #    return result
-#
-
 
 class gameObject:
     def __init__(self):
@@ -65,11 +54,6 @@ class gameObject:
 
         #attribute for other names a game object could be called
         self.aliases = []
-
-        #attribute for whether a game object is able to be picked up by the player
-        self.pickupable = False
-
-        #self.should_remove_on_activate = False
     
     #method to add an object's alias to the alias list
     def addAlias(self, objectAlias):

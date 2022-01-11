@@ -4,6 +4,7 @@ from time import sleep
 from string import punctuation
 from tabulate import tabulate
 from art import *
+import os
 
 
 #function for returning the scene id from the scenes list
@@ -71,6 +72,14 @@ def printBorder():
 '''
     print('\n\n'+borderArt + '\n\n')
 
+#function to print end credits
+def printEndcredits():
+    os.system('cls')
+    endCredits = text2art("Thank you\nfor playing\nAbendrot.", font='georgia11')
+    centerText(endCredits)
+    printBorder()
+    filename = open('docs/creditsPicture.txt', 'r')
+    print(filename.read())
 
 #function for centering text
 def centerText(text):
@@ -100,7 +109,7 @@ def isNameright(name):
         #checking if user input is a valid option
         if checkName.strip().lower() in ['no', 'n', 'nope', 'wrong']:
             print('\nI see, please reenter your name.')
-            name = input('> ')
+            name = isNamevalid(checkName)
             continue
         #stops the loop if no invalid values are found
         elif checkName in ['yes', 'correct', 'y', 'yeah', 'yea', 'yep', 'mhm', 'right']:
@@ -122,7 +131,7 @@ def getPlayername(player):
     playerName = player.setPlayername(playerName)
     return playerName
 
-#function for a while loop that checks if the user's name is the same as any myPlayers in the game
+#function for a while loop that checks if the user's name is the same as any playerNames in the game
 def isNamevalid(playerName):
     charList = ['mama', 'petra', 'michel', 'julian', 'korvin', 'emil', 'felix', 'ferdinand', 'ingrid', 'nico']
     while True:
@@ -175,16 +184,16 @@ def tryScenechange(activeScene, scenes, direction):
     if changedScene:
         description = activeScene.getDescription()
     else:
-        invalidMoveresponse = ["\nYou can't travel in that direction.", "\nWhoa, slow down, that way's a no-go.", "\nAch nein, you can't go that way, sorry.",
-                                "\nIf I could let you pass I would, but... I can't so, try again, Vöglein."]
+        invalidMoveresponse = ["You can't travel in that direction.", "Whoa, slow down, that way's a no-go.", "Ach nein, you can't go that way, sorry.",
+                                "If I could let you pass I would, but... I can't so, try again, Vöglein."]
         description = choice(invalidMoveresponse)
 
     return activeScene, description
 
 #function for printing the player's current location
 def moveHandler(current_scene, description):
-    invalidMoveresponse = ["\nYou can't travel in that direction.", "\nWhoa, slow down, that way's a no-go.", "\nAch nein, you can't go that way, sorry.",
-                                "\nIf I could let you pass I would, but... I can't so, try again, Vöglein."]
+    invalidMoveresponse = ["You can't travel in that direction.", "Whoa, slow down, that way's a no-go.", "Ach nein, you can't go that way, sorry.",
+                                "If I could let you pass I would, but... I can't so, try again, Vöglein."]
     if description in invalidMoveresponse:
         print('\n' + description)
         print('\nYou are still at ' + current_scene.areaName)
@@ -196,31 +205,6 @@ def moveHandler(current_scene, description):
         centerText(description)
 
 #function for trying to start a conversation with an npc if a player puts in a talk command
-#def tryForNPCdialogue(activeScene, npcName, playerChoice):
-    #conversationStarted = False
-    ##print(dialogue[0], dialogue[1])
-
-def playerDialoguechoice(scene, npcName, playerChoice):
-    invalidNpc = ["\nYou can't talk to this person.", "\nThey don't seem to be able to talk right now."]
-    description = choice(invalidNpc)
-    for sceneNpc in scene.npcs:
-        if npcName == sceneNpc.name:
-            if playerChoice == 1:
-                description = sceneNpc.dialogueResponse1
-            if playerChoice == 2:
-                description = sceneNpc.dialogueResponse2
-            if playerChoice == 3:
-                description = sceneNpc.dialogueResponse3
-        else:
-            for alias in sceneNpc.aliases:
-                if npcName == alias:
-                    if playerChoice == 1:
-                        description = sceneNpc.dialogueResponse1
-                    if playerChoice == 2:
-                        description = sceneNpc.dialogueResponse2
-                    if playerChoice == 3:
-                        description = sceneNpc.dialogueResponse3                    
-    return description
 
 #function for printing the available dialogue choices for the player
 def printDialoguechoices(scene, npcName):
@@ -256,68 +240,97 @@ def examineNpc(scene, npcName):
                     description = sceneNpc.NPCprofile
     return description
 
-#function to try for dialogue with an npc
-def tryNPCdialogue():
-    pass
-
 
 #function to return the dialogue 
-def getNpcdialogue(scene, npcName, dialogueId):
+def getNpcdialogue(scene, npcName, dialogueId, player):
     dialogue = "\nThat conversation topic isn't available.\n"
     dialogueStarted = False
     for sceneNpc in scene.npcs:
         if npcName == sceneNpc.name:
-            if dialogueId == 1:
-                dialogue = sceneNpc.dialogueTexts[0]
-                dialogueStarted = True
-            if dialogueId == 2:
-                dialogue = sceneNpc.dialogueTexts[1]   
-                dialogueStarted = True  
-            if dialogueId == 3:
-                dialogue = sceneNpc.dialogueTexts[2]
-                dialogueStarted = True       
-        
+            dialogue = sceneNpc.dialogueTexts[dialogueId - 1]
+            dialogueStarted = True
         else:
             for alias in sceneNpc.aliases:
                 if npcName == alias:
-                    if dialogueId == 1:
-                        dialogue = sceneNpc.dialogueTexts[0]
-                        dialogueStarted = True
-                    if dialogueId == 2:
-                        dialogue = sceneNpc.dialogueTexts[1]
-                        dialogueStarted = True
-                    if dialogueId == 3:
-                        dialogue = sceneNpc.dialogueTexts[2]
-                        dialogueStarted = True
+                    dialogue = sceneNpc.dialogueTexts[dialogueId - 1]
+                    dialogueStarted = True
         
     if dialogueStarted == True:
         for sceneNpc in scene.npcs:
-            if npcName == sceneNpc.name:
-                if dialogueId == 1:
-                    sceneNpc.dialogueTexts.pop(0)
-                    sceneNpc.dialogueResponses.pop(0)
+            if npcName == sceneNpc.name and npcName == 'julian':
+                player.gameOver = True
 
-                if dialogueId == 2:
-                    sceneNpc.dialogueTexts.pop(1)
-                    sceneNpc.dialogueResponses.pop(1)
-    
-                if dialogueId == 3:
-                    sceneNpc.dialogueTexts.pop(2)
-                    sceneNpc.dialogueResponses.pop(2)
+            elif npcName == sceneNpc.name:
+                sceneNpc.dialogueTexts.pop(dialogueId - 1)
+                sceneNpc.dialogueResponses.pop(dialogueId-1)
             else:
                 for alias in sceneNpc.aliases:
+                    if npcName == alias and npcName == 'jules':
+                        player.gameOver = True
                     if npcName == alias:
-                        if dialogueId == 1:
-                            sceneNpc.dialogueTexts.pop(0)
-                            sceneNpc.dialogueResponses.pop(0)                            
-                        if dialogueId == 2:
-                            sceneNpc.dialogueTexts.pop(1)
-                            sceneNpc.dialogueResponses.pop(1)
-                        if dialogueId == 3:
-                            sceneNpc.dialogueTexts.pop(2)
-                            sceneNpc.dialogueResponses.pop(2)
+                        sceneNpc.dialogueTexts.pop(dialogueId -1)
+                        sceneNpc.dialogueResponses.pop(dialogueId - 1)                            
+        if dialogue == []:
+            return dialogue
     return dialogue
 
+def tryForNPCdialogue(scene, npcName, player):
+    #if statements to check if the intended npc to be talked with is valid
+    dialogue = "\nYou can't talk to that person right now.\n"
+    dialogueStarted = False
+    for npc in scene.npcs:
+        if npcName == npc.name:
+            if npc.dialogueResponses == []:
+                return dialogue
+            else:
+                break
+        else:
+            for alias in npc.aliases:
+                if npcName == alias:
+                    if npc.dialogueResponses == []:
+                        return dialogue
+                    else:
+                        break                   
 
-   
+    if npcName == player.name or npcName in ['me', 'myself']:
+        dialogue = '\nWell, if you wanna talk with yourself, be my guest...\n'
 
+    elif npcName not in getNPCnames(scene):
+        invalidTalkList2 = ["Sorry, they're not here right now.", "Vöglein, they're not in your general vicinity.",
+                            "Aiya, I don't see them anywhere here."]
+        dialogue = '\n' +  choice(invalidTalkList2) + '\n'
+
+    elif npcName == '' :
+        invalidTalkList1 = ["I don't know who that is.", "With who? Try again, please.", 
+                            "I don't seem to recognize that name.", "Oh I've heard that name... They're not in Sonnenau though."]
+        dialogue = '\n' + choice(invalidTalkList1)+ '\n'
+
+    #else statement for if npc to be talked with is found to be valid
+    else:
+        dialogueStarted = True
+    
+    if dialogueStarted:
+        dialogue = askFordialogueChoice(scene, npcName, player)
+        dialogue = dialogue
+        return dialogue
+    else:
+        return dialogue
+
+
+
+def askFordialogueChoice(scene, npcName, player):
+    dialogue = ''
+    while True:
+        try:
+            dialogueChoice = int(input("> "))
+        except IndexError:
+            typeWriter("\nThat conversation topic isn't available. Try another one.\n", 0.05)
+            break
+        except ValueError:
+            typeWriter("\nThat conversation topic isn't available. Try another one.\n", 0.05)                        
+            continue
+        else:
+            output = getNpcdialogue(scene, npcName, dialogueChoice, player)
+            dialogue = output
+            return dialogue
+    return dialogue

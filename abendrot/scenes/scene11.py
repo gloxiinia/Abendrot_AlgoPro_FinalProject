@@ -9,7 +9,6 @@ from scenes.scene import gameObject, Scene, Npc
 class SceneEleven(Scene):
     def __init__(self):
         super().__init__()
-
         #setting area name
         self.areaName = "Meeresarm der Begehrlichen"
 
@@ -26,7 +25,11 @@ class SceneEleven(Scene):
         sunset.addAlias('setting sun')
         sunset.addAlias('red sun')
         sunset.detailedDescription = """
+        You don't know why, but sunsets in the inlet always seem a bit different from one viewwed at the
+        Sehnsucht Bucht. It's odd, but it lends a certain air of individuality that makes the inlet just
+        that much more special. 
         
+        At least, through your eyes.
         """
         self.addObject(sunset)
 
@@ -39,7 +42,8 @@ class SceneEleven(Scene):
         shore.addAlias('shoreline')
         shore.addAlias('seashore')
         shore.detailedDescription = """
-        
+        The shoreline here is calm. The waves don't really come in droves and you never seem to find any
+        swept up debris, sealife, or reeds.
         """
         self.addObject(shore)
 
@@ -49,7 +53,20 @@ class SceneEleven(Scene):
         julian.name = 'julian'
         julian.addNPCalias('jules')
         julian.NPCprofile = """
-        
+        Julian. What more can you say about him? Same like Nico, he doesn't like speaking much about
+        the past. Though... compared to the former, he is more open when the topic actually comes up.
+        Probably more of a you're on a need-to-know basis, if it's not brought up, no reason to trudge
+        down memory lane. 
+
+        Before moving out to the woods, he used to live in Sonnenau, near the plaza. But, for some reason
+        he hasn't shared with you, he decided to uproot his life there and live a hermit's life.
+
+        Other than that, it's not official, but he's become sort of Sonnenau's resident herbalist and doctor.
+        Growing a personal garden has its uses, y'know.
+
+        Whenever your busy schedule and his... uh.. more liberal one allows, you like to meet up in the inlet
+        just south of his cottage. It's nice to unwind with a friend, take the adventuring gear off and just...
+        Talk.
         """
         self.addNPC(julian)
 
@@ -72,7 +89,6 @@ class SceneEleven(Scene):
 
         julian.addNPCdialogueText(julianDialogueText1)
         julian.addNPCdialogueResponse("“Jules? Hey.”")
-
 
 
         

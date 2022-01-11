@@ -23,10 +23,10 @@ class SceneFour(Scene):
         # creating objects
         fruitStall = gameObject()
         fruitStall.name = 'fruit stall'
-        fruitStall.aliases.append('fruit shop')
-        fruitStall.aliases.append('fruit store')
-        fruitStall.aliases.append('fruit vendor')
-        fruitStall.aliases.append("liesl's fruits")
+        fruitStall.addAlias('fruit shop')
+        fruitStall.addAlias('fruit store')
+        fruitStall.addAlias('fruit vendor')
+        fruitStall.addAlias("liesl's fruits")
         fruitStall.detailedDescription = """
         There doesn't sseem to be anyone behind the counter here, a shame. It's fairly innocuous, 
         just selling your run-of-the-mill apples, bananas, grapes, and oh, peaches too. Neat. 
@@ -36,11 +36,11 @@ class SceneFour(Scene):
 
         antiqueStall = gameObject()
         antiqueStall.name = 'antique stall'
-        antiqueStall.aliases.append('antiques shop')
-        antiqueStall.aliases.append('antique shop')
-        antiqueStall.aliases.append('antiques stall')
-        antiqueStall.aliases.append('antique store')
-        antiqueStall.aliases.append('antiques store')
+        antiqueStall.addAlias('antiques shop')
+        antiqueStall.addAlias('antique shop')
+        antiqueStall.addAlias('antiques stall')
+        antiqueStall.addAlias('antique store')
+        antiqueStall.addAlias('antiques store')
 
         antiqueStall.detailedDescription = """
         If the rusted-to-all-hell weapons proudly displayed front and center didn't convince you, 

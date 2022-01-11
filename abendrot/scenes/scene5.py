@@ -22,19 +22,33 @@ class SceneFive(Scene):
         # creating objects
         statue = gameObject()
         statue.name = 'statue'
-        statue.aliases.append('sol statue')
-        statue.aliases.append('statue of sol and mani')
-        statue.aliases.append('mani statue')
+        statue.addAlias('sol statue')
+        statue.addAlias('statue of sol and mani')
+        statue.addAlias('mani statue')
+        statue.addAlias('sol and mani statue')
         statue.detailedDescription = """
-        
+        They say Sol and Mani first emerged onto the land as the cosmos was still in its infancy, they 
+        didn’t know what their powers were or what role they were meant to play in the new world.
+
+        After the gods had created the sky, they made the Sun from molten sparks that had flown out 
+        of the fiery realm of Muspelheim, and they set it in the sky to illuminate the world. For some 
+        reason the gods became angry at Sol and Mani, or at their father, Mundilfari, and they took the 
+        two to guide the Sun and Moon in their paths.
+
+        Sol was forced to drive the Sun’s chariot and to guide its two horses, Arvak and Alsvinn. Sol had 
+        to travel at great speed, pursued by a wolf named Skoll who would eventually devour her.
+
+        The boy, Mani, was forced to guide the course of the Moon. He also controlled its waxing and waning. 
+        Mani, too, had to travel swiftly, because the moon hound, Hati Hrodvitnisson, followed in pursuit.
+
         """
         self.addObject(statue)
 
         portullis = gameObject()
         portullis.name = 'portullis'
-        portullis.aliases.append('gate')
-        portullis.aliases.append('gates')
-        portullis.aliases.append('grille')
+        portullis.addAlias('gate')
+        portullis.addAlias('gates')
+        portullis.addAlias('grille')
         portullis.detailedDescription ="""
         The steel is still oiled and the wood taken care of. Though, they're rarely lowered nowadays.
         Years upon years of treatises have all but made the continent of Feoyioran a safe place. 

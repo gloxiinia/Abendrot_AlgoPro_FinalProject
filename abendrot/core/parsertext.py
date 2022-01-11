@@ -30,7 +30,7 @@ def parse(input_text):
                     if i < len(words)-1:
                         remaining_words += " "
                 command = "examine"
-                object1 = remaining_words
+                object1 = remaining_words.lower()
         
         foundMovewords = False
         if words[0] in moveActions:
@@ -48,7 +48,7 @@ def parse(input_text):
                     if i < len(words) - 1:
                         remaining_words += " "
                     command = 'move'
-                    object1 = remaining_words
+                    object1 = remaining_words.lower()
 
         foundChatwords = False
         if words[0] in talkActions:
@@ -66,7 +66,7 @@ def parse(input_text):
                     if i < len(words)-1:
                         remaining_words += " "
                 command = "talk"
-                object1 = remaining_words
+                object1 = remaining_words.lower()
 
         found_take_words = False
         if (words[0] == "take") and len(words) > 1:
@@ -84,10 +84,9 @@ def parse(input_text):
                 if i < len(words)-1:
                     remaining_words += " "
             command = "take"
-            object1 = remaining_words
+            object1 = remaining_words.lower()
         
     return command, object1
 
 
-check = 'talk with michel'
-print(parse(check))
+print(parse('talk to Emil'))

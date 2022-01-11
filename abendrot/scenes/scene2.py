@@ -25,7 +25,7 @@ class SceneTwo(Scene):
         # creating objects
         bar = gameObject()
         bar.name = 'bar'
-        bar.aliases.append('counter')
+        bar.addAlias('counter')
         bar.detailedDescription = """
         The main attraction of the Vagabond's Folly. No less rowdy than usual. Michel is
         serving a variety of drinks to the patrons, the patrons accept, and after a cheer--
