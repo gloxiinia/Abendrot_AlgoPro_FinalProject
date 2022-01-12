@@ -61,7 +61,8 @@ class SceneOne(Scene):
         of Osse. Growing up to 3 metres tall, they grew in tandem with Osse's people, even going out
         in the day to help them when needed, in return the citizens would offer extra food and help 
         the owls defend their territory. While the owls seemed capable enough on their own and it was 
-        mostly a ceremonial affair, nevertheless, the arrangement strengthened the bond between the two parties.
+        mostly a ceremonial affair, nevertheless, the arrangement strengthened the bond between the 
+        two parties.
         """
         self.addObject(book2)
 

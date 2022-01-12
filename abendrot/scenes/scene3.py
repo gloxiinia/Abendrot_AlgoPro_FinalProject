@@ -35,6 +35,8 @@ class SceneThree(Scene):
         ingrid = Npc()
         ingrid.name = 'ingrid'
         ingrid.addNPCalias('inna')
+        ingrid.addNPCalias('ingrid and korvin') 
+        ingrid.addNPCalias('korvin and ingrid')
         ingrid.NPCprofile = """
         Ingrid Leitz. Known amongst the adventurers as "Aren" or the eagle, she made a name for 
         herself when she took up a request to uncover the ancient city of Osse, which at that point,
@@ -70,8 +72,6 @@ class SceneThree(Scene):
         Well, at least it’s a harmless quarrel… right?
         """
         ingrid.addNPCblurb(ingridBlurb)
-        korvin.addNPCblurb(ingridBlurb)
-
         ingrid.dialogueText1 = """
         They ignore your greeting.
 
@@ -112,8 +112,6 @@ class SceneThree(Scene):
         """
         ingrid.addNPCdialogueText(ingrid.dialogueText1)
         ingrid.addNPCdialogueResponse("“Hey guys. What's up?”")
-        korvin.addNPCdialogueText(ingrid.dialogueText1)
-        korvin.addNPCdialogueResponse("“Hey guys. What's up?”")
 
         
 

@@ -40,6 +40,7 @@ scenes.append(s9.SceneNine())
 scenes.append(s10.SceneTen())
 scenes.append(s11.SceneEleven())
 
+os.system("MODE 130, 150")
 #setting the initial active scene as the first scene
 activeScene = scene_1
 
@@ -184,26 +185,26 @@ def printTitle():
     #declaring the converted ascii art title to the titleArt variable
     titleArt=text2art("Abendrot", font='fraktur')
     #printing the title art
-    print(titleArt)
+    centerText(titleArt)
     #declaring the sunset ascii art as the sunset variable
     sunset = '''
-                             ^^                   @@@@@@@@@
-                        ^^       ^^            @@@@@@@@@@@@@@@
-                                             @@@@@@@@@@@@@@@@@@              ^^
-                                            @@@@@@@@@@@@@@@@@@@@
-                  ~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~
-                  ~         ~~   ~  ~       ~~~~~~~~~~~~~~~~~~~~ ~       ~~     ~~ ~
-                    ~      ~~      ~~ ~~ ~~  ~~~~~~~~~~~~~ ~~~~  ~     ~~~    ~ ~~~  ~ ~~
-                    ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~
-                  ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
+                                  ^^                   @@@@@@@@@
+                             ^^       ^^            @@@@@@@@@@@@@@@
+                                                  @@@@@@@@@@@@@@@@@@              ^^
+                                                 @@@@@@@@@@@@@@@@@@@@
+                       ~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~
+                       ~         ~~   ~  ~       ~~~~~~~~~~~~~~~~~~~~ ~       ~~     ~~ ~
+                         ~      ~~      ~~ ~~ ~~  ~~~~~~~~~~~~~ ~~~~  ~     ~~~    ~ ~~~  ~ ~~
+                         ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~
+                       ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
                         ~             ~        ~      ~      ~~   ~             ~
-            \n'''
+            '''
     #printing the sunset art
     print(sunset)
     #closing the title screen art section by calling another printBorder
     printBorder()
     #printing the welcome text and options for the player
-    typeWriter('                              Welcome to Abendrot, a text-based experimental game.                              ' +'\n'*4)
+    typeWriter('                                     Welcome to Abendrot, a text-based experimental game.' +'\n'*4)
     titleText = """
     >     PLAY    <\n
     >     HELP    <\n
@@ -222,7 +223,9 @@ def helpScreen():
     >                       Type your commands in the console to do them                       <\n
     >           Use "map" or examine commands + "map" to bring up the map of Sonnenau          <\n
     >                    Use "look at" or "examine" to inspect an something                    <\n
+    >       Use examine words and 'around' to get a more detailed description of the area      <\n    
     >            Use "talk to" or "chat with" to start a conversation with someone             <\n
+    >                   Use 'leave' or 'escape' to exit from a conversation                    <\n
     >        Use "up", "down", "left", "right" or use cardinal directions to move around       <\n
     >                           Don\'t forget to have fun! ૮ ˶ᵔ ᵕ ᵔ˶ ა                          <
     """
@@ -295,5 +298,5 @@ def gameSetup():
     printBorder()
     gameLoop()
 
+printTitle()
 
-printEndcredits()

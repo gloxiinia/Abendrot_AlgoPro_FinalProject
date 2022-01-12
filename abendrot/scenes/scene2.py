@@ -85,7 +85,11 @@ class SceneTwo(Scene):
         “Fair enough,” he says with a small laugh.
         """
         michel.addNPCdialogueText(michelDialogue1) 
-
+        '''
+          .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.      .--.      .-'.      .--.       .--.   
+        :::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\:::::::::.\:::  
+               `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `--'      `--'      `.-'      `-.-'      `-  
+        '''
         #MICHEL DIALOGUE CHOICE 2
         michelDialogue2 = """
         “Oho, feeling adventurous today aren’t you?”
@@ -326,7 +330,8 @@ class SceneTwo(Scene):
 
         “Wanderlust took over and one day, I… I just followed the urge and left.”
 
-        “The von Albrechts are a rather small, but impactful family, so, much to my chagrin, rumors flocked to me like moths to a flame.”
+        “The von Albrechts are a rather small, but impactful family, so, much to my chagrin, rumors flocked to 
+        me like moths to a flame.”
 
         “But I don’t blame the people, they need a bit of entertainment now and then. And who am I to decline such a calling?”
 

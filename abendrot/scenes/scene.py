@@ -23,9 +23,6 @@ class Scene:
     #mutator method to update the examination text
     def setExamination(self, examineText):
         self.examination = examineText
-
-    def examineObject(self, object_name):
-        pass
     
     # method to add objects to the objects list
     def addObject(self, object):
@@ -62,8 +59,6 @@ class gameObject:
 class Character:
     def __init__(self):
         self.name = ""
-
-        self.title = ""
 
 
 class Player(Character):

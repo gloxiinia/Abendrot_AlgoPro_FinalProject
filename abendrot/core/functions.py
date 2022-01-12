@@ -43,7 +43,9 @@ def getHelp():
     >                       Type your commands in the console to do them                       <\n
     >                         Use "map" to bring up the map of Sonnenau                        <\n
     >                    Use "look at" or "examine" to inspect an something                    <\n
+    >       Use examine words and 'around' to get a more detailed description of the area      <\n
     >            Use "talk to" or "chat with" to start a conversation with someone             <\n
+    >                   Use 'leave' or 'escape' to exit from a conversation                    <\n
     >        Use "up", "down", "left", "right" or use cardinal directions to move around       <\n
     >                           Don\'t forget to have fun! ૮ ˶ᵔ ᵕ ᵔ˶ ა                          <
     """
@@ -66,11 +68,11 @@ def typeWriter(text, start=None, stop=None):
 def printBorder():
     #declaring the border ascii art as the borderArt variable
     borderArt = '''
-  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.      .--.      .-'.      .--.   
-:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\  
-       `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `--'      `--'      `.-'      `-            
+.--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.      .--.      .-'.      .--.       .--.   
+:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\:::::::::.\:::
+         `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `--'      `--'      `.-'      `-.-'      `-     
 '''
-    print('\n\n'+borderArt + '\n\n')
+    centerText('\n\n'+borderArt + '\n\n')
 
 #function to print end credits
 def printEndcredits():
@@ -84,7 +86,7 @@ def printEndcredits():
 #function for centering text
 def centerText(text):
     for line in text.split("\n"):
-        print(line.center(104))
+        print(line.center(126))
 
 
 #function for getting the scene's designated id from the list of scenes
@@ -204,12 +206,14 @@ def moveHandler(current_scene, description):
         centerText(current_scene.areaName.upper())
         centerText(description)
 
-#function for trying to start a conversation with an npc if a player puts in a talk command
 
 #function for printing the available dialogue choices for the player
 def printDialoguechoices(scene, npcName):
     for sceneNpc in scene.npcs:
-        if npcName == sceneNpc.name:
+        if not sceneNpc.dialogueResponses:
+            break
+            break
+        elif npcName == sceneNpc.name:
             print(sceneNpc.dialogueBlurbs)
             y = 1
             for x in range(len(sceneNpc.dialogueResponses)):
@@ -222,8 +226,7 @@ def printDialoguechoices(scene, npcName):
                     y = 1
                     for x in range(len(sceneNpc.dialogueResponses)):
                         print(f'{y}. ' + sceneNpc.dialogueResponses[x])
-                        y += 1
-         
+                    y += 1    
 
 
 #function to return npc profile for if a player examines an NPC
@@ -274,6 +277,8 @@ def getNpcdialogue(scene, npcName, dialogueId, player):
             return dialogue
     return dialogue
 
+
+#function for trying to start a conversation with an npc if a player puts in a talk command
 def tryForNPCdialogue(scene, npcName, player):
     #if statements to check if the intended npc to be talked with is valid
     dialogue = "\nYou can't talk to that person right now.\n"
@@ -317,20 +322,29 @@ def tryForNPCdialogue(scene, npcName, player):
         return dialogue
 
 
-
+#function to ask user input for dialogue choices 
 def askFordialogueChoice(scene, npcName, player):
-    dialogue = ''
+    dialogue = "\nThat conversation topic isn't available. Try another one.\n"
     while True:
-        try:
-            dialogueChoice = int(input("> "))
-        except IndexError:
-            typeWriter("\nThat conversation topic isn't available. Try another one.\n", 0.05)
-            break
-        except ValueError:
-            typeWriter("\nThat conversation topic isn't available. Try another one.\n", 0.05)                        
+        dialogueChoice = input("> ")
+        if dialogueChoice == '0':
+            typeWriter(dialogue, 0.05)
             continue
         else:
-            output = getNpcdialogue(scene, npcName, dialogueChoice, player)
-            dialogue = output
-            return dialogue
-    return dialogue
+            if dialogueChoice not in ['leave', 'exit', 'esc', 'x']:
+                try:
+                    dialogueChoice = int(dialogueChoice)
+                    dialogue = getNpcdialogue(scene, npcName, dialogueChoice, player)
+                except IndexError:
+                    typeWriter(dialogue, 0.05)
+                    continue
+                except ValueError:
+                    typeWriter(dialogue, 0.05)                        
+                    continue
+                else:
+                    return dialogue
+            else:
+                leaveConversation = ["\nYou have left the conversation.\n", "\nYou think it over and decide to not go over to talk.\n",
+                                    "\nOn second thought, you want to do something else.\n"]
+                dialogue = choice(leaveConversation)
+                return dialogue
