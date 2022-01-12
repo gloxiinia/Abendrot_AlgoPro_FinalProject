@@ -204,7 +204,7 @@ def printTitle():
     #closing the title screen art section by calling another printBorder
     printBorder()
     #printing the welcome text and options for the player
-    typeWriter('                                     Welcome to Abendrot, a text-based experimental game.' +'\n'*4)
+    typeWriter('                                     Welcome to Abendrot, an experimental tezt-based game.' +'\n'*4)
     titleText = """
     >     PLAY    <\n
     >     HELP    <\n

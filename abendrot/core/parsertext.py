@@ -87,6 +87,3 @@ def parse(input_text):
             object1 = remaining_words.lower()
         
     return command, object1
-
-
-print(parse('talk to Emil'))
