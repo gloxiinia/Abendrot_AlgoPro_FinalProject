@@ -1,11 +1,11 @@
 #creating the scene class
-
-
 class Scene:
-    #vconstructor method for the attributes of the scene class
+    #constructor method for the attributes of the scene class
     def __init__(self):
-
+        #attribute to identify the scene/location
         self.id = ""
+
+        #attribute to store a scene/location/area's name
         self.areaName = ""
 
         #attributes for the scene exits
@@ -14,15 +14,9 @@ class Scene:
         self.east = None
         self.west = None
 
-        self.is_first_visit = True
-
         #attributes for the game objects and npcs in a scene/location
         self.objects = []
         self.npcs = []
-    
-    #mutator method to update the examination text
-    def setExamination(self, examineText):
-        self.examination = examineText
     
     # method to add objects to the objects list
     def addObject(self, object):
@@ -40,6 +34,7 @@ class Scene:
     def getExamination(self):
         return ""
     
+    #getter method that returns the area name
     def getAreaname(self):
         return self.areaName
 
@@ -56,11 +51,13 @@ class gameObject:
     def addAlias(self, objectAlias):
         self.aliases.append(objectAlias)
 
+
+#creating the character class
 class Character:
     def __init__(self):
         self.name = ""
 
-
+#creating the playable character subclass
 class Player(Character):
     def __init__(self):
         super().__init__()
@@ -68,11 +65,8 @@ class Player(Character):
     
     def setPlayername(self, name):
         self.name = name
-    
-    def getName(self):
-        return self.name
 
-
+#creating the npc subclass
 class Npc(Character):
     def __init__(self):
         super().__init__()
@@ -108,9 +102,5 @@ class Npc(Character):
     def addNPCdialogueText(self, dialogueText):
         self.dialogueTexts.append(dialogueText)
     
-
-
-
-#
 
 

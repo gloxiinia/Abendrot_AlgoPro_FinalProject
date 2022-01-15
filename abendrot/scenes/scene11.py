@@ -70,6 +70,8 @@ class SceneEleven(Scene):
         """
         self.addNPC(julian)
 
+        #### JULIAN DIALOGUE ####
+
         julianBlurb = """
         You see Julian sitting on the sand, closer to the rippling waves than dry land. He's facing the sunset. 
         But as he hears the soft, but audible crunch of footsteps on sand, he turns.

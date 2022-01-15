@@ -1,9 +1,6 @@
 #importing the needed modules
-
-
-
 from core.parsertext import parse
-from core.functions import tryScenechange, examineObject, getHelp, moveHandler, examineNpc, printDialoguechoices
+from core.functions import tryScenechange, examineObject, getHelp, moveHandler, examineNpc, printDialoguechoices, getAllnpcNames
 from core.functions import centerText, typeWriter, printBorder, printMap, getPlayername, tryForNPCdialogue, printEndcredits
 from art import *
 
@@ -40,12 +37,17 @@ scenes.append(s9.SceneNine())
 scenes.append(s10.SceneTen())
 scenes.append(s11.SceneEleven())
 
-os.system("MODE 130, 150")
+#setting the display size of the cmd window
+os.system("mode con cols=130 lines=45")
+
 #setting the initial active scene as the first scene
 activeScene = scene_1
 
 #creating the player
 myPlayer = char.Player()
+
+#getting the entire character and alias list
+charList = getAllnpcNames(scenes)
 
 
 #function for prompting the player with an input as an action
@@ -61,9 +63,6 @@ def promptAction():
 
     #list of valid move directions
     moveDirections = ['north', 'up', 'south', 'down', 'east', 'right', 'west', 'left']
-
-    #list of the character names
-    charList = ['mama', 'petra', 'michel', 'julian', 'korvin', 'emil', 'felix', 'ferdinand', 'ingrid', 'nico']
 
     #while loop to check if user input is valid
     while isGameover == False:
@@ -90,7 +89,7 @@ def promptAction():
 
         #elif statement for printing the map
         elif parsedAction[0] == 'map' or parsedAction[0] in examineActions and parsedAction[1] == 'map':
-            printMap(myPlayer)
+            printMap()
             break
 
         #elif statement for if user wants to inspect or look at something
@@ -106,8 +105,10 @@ def promptAction():
         #elif statement for if user wants to move
         elif parsedAction[0] in moveActions :
             if parsedAction[1] not in moveDirections:
-                invalidMovedirectionsList = ["Hmm? I didn't catch that, go where? Try again, please.", "Where did you wanna go? Could you try again?",
-                "I didn't recognize that direction, sorry.", "Try again please, I couldn't understand which direction you meant."]
+                invalidMovedirectionsList = ["Hmm? I didn't catch that, go where? Try again, please.", 
+                "Where did you wanna go? Could you try again?", "I didn't recognize that direction, sorry.", 
+                "Try again please, I couldn't understand which direction you meant."]
+
                 print('\n' + random.choice(invalidMovedirectionsList))
                 break
             else:
@@ -120,11 +121,13 @@ def promptAction():
         #elif statement for if the user wants to talk to an NPC
         elif parsedAction[0] in talkActions:
             printDialoguechoices(activeScene, parsedAction[1])
-            output = tryForNPCdialogue(activeScene, parsedAction[1], myPlayer)
+            output = tryForNPCdialogue(scenes, activeScene, parsedAction[1], myPlayer)
             dialogue = output
             dialogue = dialogue.replace('playername', myPlayer.name)
             typeWriter(dialogue, 0.05)
             break
+        
+        #if statement for if the gameOver attribute is True, to break out of the loop
         if myPlayer.gameOver is True:
             isGameover = True
             break
@@ -149,18 +152,18 @@ def titleScreenoptions():
         userOption = userOption.strip().lower()
         #checking if user input is a valid option
         if userOption not in titleOptions:
-            print('Please enter a valid option from the menu.')
+            print('\nPlease enter a valid option from the menu.\n')
             continue
         #stops the loop if no exceptions or invalid values are found
         else:
             break
     #input validation with elif statements
     if userOption == 'play':
-        #calls the startgame function to start the game
-        gameSetup() #placeholder function, if implemented, will run the game's code
+        #calls the gameSetup function to start the game
+        gameSetup() #will run the game's code
 
     elif userOption == 'help':
-        #calls the helpMenu function to show the help menu
+        #calls the helpScreen function to show the help menu
         helpScreen()
 
     elif userOption == 'credits' or userOption == 'credit':
@@ -204,7 +207,7 @@ def printTitle():
     #closing the title screen art section by calling another printBorder
     printBorder()
     #printing the welcome text and options for the player
-    typeWriter('                                     Welcome to Abendrot, an experimental tezt-based game.' +'\n'*4)
+    typeWriter('                                     Welcome to Abendrot, an experimental text-based game.' +'\n'*4)
     titleText = """
     >     PLAY    <\n
     >     HELP    <\n
@@ -218,18 +221,7 @@ def printTitle():
 #declaring a function that will print the help screen containing the command list/tutorial
 def helpScreen():
     printBorder()
-    helpText ="""                       
-    This is the essential information needed to play the game.\n\n\n
-    >                       Type your commands in the console to do them                       <\n
-    >           Use "map" or examine commands + "map" to bring up the map of Sonnenau          <\n
-    >                    Use "look at" or "examine" to inspect an something                    <\n
-    >       Use examine words and 'around' to get a more detailed description of the area      <\n    
-    >            Use "talk to" or "chat with" to start a conversation with someone             <\n
-    >                   Use 'leave' or 'escape' to exit from a conversation                    <\n
-    >        Use "up", "down", "left", "right" or use cardinal directions to move around       <\n
-    >                           Don\'t forget to have fun! ૮ ˶ᵔ ᵕ ᵔ˶ ა                          <
-    """
-    centerText(helpText)
+    getHelp()
     titleScreenoptions()
 
 #declaring a function that will print the screen containing the background behind the game
@@ -257,23 +249,24 @@ def creditScreen():
     >                     2. https://github.com/MyreMylar/christmas_adventure                  <\n
     >              3. https://www.youtube.com/channel/UCnxsHQQIHpJw1ivDgaKp6pA                 <\n
 
-    I am also deeply grateful to my dear friend, who will remain anonymous, 
-    who helped me solidify the concept, characters, and dialogue. :D
+    I am also deeply grateful to my close friends, who will remain anonymous, 
+    who helped me solidify the concept, characters, dialogue, and program. :D
     """
     centerText(creditText)
     titleScreenoptions()
 
 
 
-            
+#### GAME SETUP/INTRO SEQUENCE ####        
 def gameSetup():
     os.system('cls')
-    playerName = getPlayername(myPlayer)
+    getPlayername(scenes, myPlayer)
     #INTRODUCTION TO THE GAME
-    typeWriter(f"\nYou must have many questions, {playerName}. I'm afraid I hold none of the answers you seek.\n", 0.1) 
+    typeWriter(f"\nYou must have many questions, {myPlayer.name}. I'm afraid I hold none of the answers you seek.\n", 0.1) 
     typeWriter("You might find them on this journey. Or perhaps not.\n")
     typeWriter("Nothing in life ever seems to come clear-cut nor unmuddled.\n")
-    typeWriter("Philosophical questions and theories stimulate the mind and push us to venture beyond.\nEven if it often leads to existential crises.\n")
+    typeWriter("Philosophical questions and theories stimulate the mind and push us to venture beyond.\n")
+    typeWriter("Even if it often leads to existential crises.\n")
     typeWriter("In Sonnenau, perhaps mimesis could be attributed to old tales and legends its folk cling to dearly.\n")
     typeWriter('So come, then, Vöglein. See what you can learn in Sonnenau, from its denizens or even from nature itself.\n')
     typeWriter('Or just, wander around.\nWhatever floats your metaphorical boat, little one.\n')
@@ -281,11 +274,12 @@ def gameSetup():
     
     #clearing the console to signify the start of the game
     os.system('cls')
-    printBorder()
     introArt=text2art("Begin...", font='georgia11')
+    getHelp()
+    printBorder()
     introBlurb = """
     You're an adventurer, hailing from Sonnenau, a coastal town tens of miles away from the mainland
-    of Caelis. While being ecnomically reliant on the ocean and the nautical, Sonnenau also prides 
+    of Caelis. While being economically reliant on the ocean and the nautical, Sonnenau also prides 
     itself of being the second largest hub between Caelis and Iaseon, where merchant boats dock and
     trade; passenger ships transport and ferry people, tourists, adventurers, all sorts; and where the
     annual Festival of the Seafarers is held. You're home now. Just woken up from a (deserved) 
@@ -297,6 +291,3 @@ def gameSetup():
     centerText(introBlurb)
     printBorder()
     gameLoop()
-
-printTitle()
-

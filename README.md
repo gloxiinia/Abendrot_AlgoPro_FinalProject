@@ -17,6 +17,10 @@ ASCII art used:
 1. Sunset ASCII art can be found at: https://asciiart.website/index.php?art=nature/sunset
 2. Border ASCII art can be found at: https://asciiart.website/index.php?art=art%20and%20design/borders
 
+Sonnenau map made using:
+1. https://inkarnate.com/
+2. http://trizbort.io/
+
 
 
 

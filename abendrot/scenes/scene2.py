@@ -173,43 +173,7 @@ class SceneTwo(Scene):
 
         petraDialogue1 = """
         Though she slightly slurs the words, it’s still understandable. 
-        
-        “Heyyyy! playername! Yep, all orders done and dusted. Free as a bird till tomorrow. Haha.” 
-        
-        “Glad to see you’re making the most of it then, Petra,” you say, pulling up a seat.
 
-        “Free time is like looking for a... A.. Straw in a hay bale, yeah.”
-
-        Shaking your head, you wonder how many mugs of ale Petra has drank. You see her wave a waiter for another round.
-
-        “Maybe you should take it slow, just a bit?” You try to reason. 
-        
-        Petra throws you a glare. 
-        Its effect is dampened on account of the confused look her face is making, but it’s a glare, nonetheless.
-
-        “Petra, come on? Think of tomorrow… Hangovers… Piled up orders…”
-
-        Her eyes go wide when she hears ‘piled up orders’.
-
-        “Ughhhh. I hate you.”
-
-        “But imagine--" You say in the most dramatic tone you can muster.
-        "Trying to stitch and weave through a headache, you know even Julian doesn’t have an effective cure for hangovers.”
-
-        “Stop, stop, stop, stop making sense, damn it.”
-
-        After a pregnant pause, and one last, resigned sip of her drink, she finally relents.
-
-        “Fine, whatever, tell that waiter that ale’s on me, I’ll go home," Petra says, standing up and out of her chair.
-
-        “Want me to walk you home?” You offer.
-
-        “No need, I can still manage. Good night.”
-
-        “Good…night, yeah.”
-
-        You’re a bit skeptical about that, considering the sun’s still technically out, 
-        but you watch as Petra makes her way out of the Vagabond’s Folly.
         """
         petra.addNPCdialogueText(petraDialogue1)
 

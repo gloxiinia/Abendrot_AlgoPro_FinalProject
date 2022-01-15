@@ -1,6 +1,3 @@
-
-
-
 def parse(input_text):
     command = input_text.lower()
     object1 = None
@@ -10,9 +7,9 @@ def parse(input_text):
 
     if len(words) > 0:        
         remaining_words_index = 0
-        examineActions = ('look', 'inspect', 'check', 'examine', 'study')
-        moveActions = ('move', 'walk', 'travel', 'go')
-        talkActions = ('talk', 'chat')
+        examineActions = ['look', 'inspect', 'check', 'examine', 'study']
+        moveActions = ['move', 'walk', 'travel', 'go']
+        talkActions = ['talk', 'chat']
 
         foundExaminewords = False
         if words[0] in examineActions:
@@ -54,7 +51,7 @@ def parse(input_text):
         if words[0] in talkActions:
             remaining_words_index = 1
             foundChatwords = True
-        if words[0] == 'talk' or words[0] == 'chat' and words[1] == 'with':
+        if (words[0] == 'talk' or words[0] == 'chat') and (words[1] == 'with' or words[1] == 'to'):
             remaining_words_index = 2
             foundChatwords = True
         
@@ -67,23 +64,7 @@ def parse(input_text):
                         remaining_words += " "
                 command = "talk"
                 object1 = remaining_words.lower()
-
-        found_take_words = False
-        if (words[0] == "take") and len(words) > 1:
-            found_take_words = True
-            remaining_words_index = 1
-
-        if (words[0] == "pick") and (words[1] == "up") and len(words) > 2:
-            found_take_words = True
-            remaining_words_index = 1
-
-        if found_take_words:
-            remaining_words = ""
-            for i in range(remaining_words_index, len(words)):
-                remaining_words += words[i]
-                if i < len(words)-1:
-                    remaining_words += " "
-            command = "take"
-            object1 = remaining_words.lower()
         
     return command, object1
+
+print(parse('talk to me'))
