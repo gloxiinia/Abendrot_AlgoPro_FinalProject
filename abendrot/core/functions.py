@@ -316,7 +316,7 @@ def tryForNPCdialogue(scenes, currentScene, npcName, player):
         dialogueStarted = True
     
     if dialogueStarted:
-        dialogue = askFordialogueChoice(scene, npcName, player)
+        dialogue = askFordialogueChoice(currentScene, npcName, player)
         return dialogue
     else:
         return dialogue
