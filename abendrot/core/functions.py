@@ -148,10 +148,10 @@ def printEndcredits():
     endCredits = text2art("Thank you\nfor playing\nAbendrot.", font='georgia11')
     centerText(endCredits)
     printBorder()
-    filename = open('D:\Programming\Github Repos\Final-Project-PDM-2502009646-Rachel_Anastasia_Wijaya\docs\creditsPicture.txt', 'r')
+    filename = open('creditsPicture.txt', 'r')
     print(filename.read())
     filename.close
-    playsound('D:\Programming\Github Repos\Final-Project-PDM-2502009646-Rachel_Anastasia_Wijaya\docs\The_Koi_and_the_Dragon.wav')
+    playsound('The_Koi_and_the_Dragon.wav')
 
 #function for centering text
 def centerText(text):
@@ -220,7 +220,7 @@ def isNamevalid(scenes, playerName):
 #function for printing a visualized map in an image
 def printMap():
     #using the open command to open the picture of the Sonnenau map
-    sonnenauMap = Image.open("D:\Programming\Github Repos\Final-Project-PDM-2502009646-Rachel_Anastasia_Wijaya\docs\Sonnenau.jpg")
+    sonnenauMap = Image.open("Sonnenau.jpg")
     sonnenauMap.show()
 
 
