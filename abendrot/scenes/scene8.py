@@ -27,7 +27,7 @@ class SceneEight(Scene):
         trees.addAlias('thicket')
         trees.addAlias('grove')
         trees.detailedDescription = """
-        
+        The trees rise up, up, up until barely any light passes through them. To say they're dense and overgrown would be an understatement.
         """
         self.addObject(trees)
 
@@ -145,5 +145,7 @@ class SceneEight(Scene):
         Rarely seen, even at night when they're most active. Their hooting, combined with the 
         ambiance of the dense, near-lightless canopies is enough to give anyone shivers. But, the forest
         itself, looking past the general creepiness, is calm. So, very calm.
+
+        But amidst that calm, you swear you can hear rustling in the trees. 
         """
         return examination        

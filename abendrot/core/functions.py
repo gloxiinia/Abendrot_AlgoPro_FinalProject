@@ -176,14 +176,14 @@ def getAllnpcNames(scenes):
     return allNpclist
 
 #function for a while loop that checks if the user typed their name correctly
-def isNameright(name):
+def isNameright(scenes, name):
     while True:
         #prompting user input
         checkName = input(f'\n{name}, is that correct?\n> ')
         #checking if user input is a valid option
         if checkName.strip().lower() in ['no', 'n', 'nope', 'wrong']:
             print('\nI see, please reenter your name.')
-            name = isNamevalid(checkName)
+            name = isNamevalid(scenes, checkName)
             continue
         #stops the loop if no invalid values are found
         elif checkName in ['yes', 'correct', 'y', 'yeah', 'yea', 'yep', 'mhm', 'right']:
@@ -200,7 +200,7 @@ def getPlayername(scenes, player):
     \n\nDo tell, what is your name, Vöglein?\n"""
     typeWriter(askPlayername)
     playerName = isNamevalid(scenes, askPlayername)
-    playerName = isNameright(playerName)
+    playerName = isNameright(scenes, playerName)
     typeWriter(f'\n{playerName}... Fascinating.\n',0.3)
     typeWriter('Your name is foreign to my memory, yet the aura you carry within is familiar.\n')
     player.setPlayername(playerName)
@@ -220,7 +220,7 @@ def isNamevalid(scenes, playerName):
 #function for printing a visualized map in an image
 def printMap():
     #using the open command to open the picture of the Sonnenau map
-    sonnenauMap = Image.open("docs/Sonnenau.jpg")
+    sonnenauMap = Image.open("D:\Programming\Github Repos\Final-Project-PDM-2502009646-Rachel_Anastasia_Wijaya\docs\Sonnenau.jpg")
     sonnenauMap.show()
 
 

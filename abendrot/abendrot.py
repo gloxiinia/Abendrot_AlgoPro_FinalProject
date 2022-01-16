@@ -38,7 +38,7 @@ scenes.append(s10.SceneTen())
 scenes.append(s11.SceneEleven())
 
 #setting the display size of the cmd window
-os.system("mode con cols=130 lines=45")
+os.system("mode con cols=130 lines=800")
 
 #setting the initial active scene as the first scene
 activeScene = scene_1
@@ -220,7 +220,6 @@ def printTitle():
 
 #declaring a function that will print the help screen containing the command list/tutorial
 def helpScreen():
-    printBorder()
     getHelp()
     titleScreenoptions()
 
@@ -291,3 +290,5 @@ def gameSetup():
     centerText(introBlurb)
     printBorder()
     gameLoop()
+
+printTitle()
