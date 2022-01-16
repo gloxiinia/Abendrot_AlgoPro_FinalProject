@@ -21,6 +21,11 @@ Sonnenau map made using:
 1. https://inkarnate.com/
 2. http://trizbort.io/
 
+Extra Notes:
+
+For the files to run properly, ensure you've installed the art module from: https://pypi.org/project/art/
+Or use 'pip install art' in your terminal/console
+
 
 
 
