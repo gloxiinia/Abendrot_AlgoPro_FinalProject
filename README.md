@@ -24,6 +24,7 @@ Sonnenau map made using:
 Extra Notes:
 
 For the files to run properly, ensure you've installed the art module from: https://pypi.org/project/art/
+
 Or use 'pip install art' in your terminal/console
 
 
