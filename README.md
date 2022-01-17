@@ -29,9 +29,9 @@ The report for this project can be found in the docs folder
 
 Extra Notes:
 
-For the files to run properly, ensure you've installed the art module from: https://pypi.org/project/art/ and Pillow
+For the files to run properly, ensure you've installed the art module from: https://pypi.org/project/art/, Pillow, and playsound
 
-Or use 'pip install art' and 'pip install Pillow' in your terminal/console
+Or use 'pip install art', 'pip install Pillow' in your terminal/console, or 'pip install playsound'
 
 
 
