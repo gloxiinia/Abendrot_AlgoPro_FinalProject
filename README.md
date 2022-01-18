@@ -4,7 +4,7 @@ The repository containing the code for the Algorithm and Programming Final Proje
 
 CREDITS:
 
-Python code for the text-based adevnture game inspired by:
+Python code for the text-based adventure game inspired by:
 1. https://www.youtube.com/channel/UC5akxkiQHpxCzPZWskdBbQQ
 2. https://github.com/MyreMylar/christmas_adventure
 3. https://www.youtube.com/channel/UCnxsHQQIHpJw1ivDgaKp6pA
@@ -20,6 +20,7 @@ ASCII art used:
 Sonnenau map made using:
 1. https://inkarnate.com/
 2. http://trizbort.io/
+
 
 The video demo for this project can be found here:
 
